@@ -13,10 +13,55 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        window?.rootViewController = createTabbar()
+        window?.makeKeyAndVisible()
+        
+        configureNavigationBar()
+    }
+    
+    
+    func createInitialNC() -> UINavigationController {
+        let initialVC = InitialVC()
+        initialVC.title = "Home".uppercased()
+        initialVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+        
+        return UINavigationController(rootViewController: initialVC)
+    }
+    
+    
+    func createGameNC() -> UINavigationController {
+        let gameVC = GameVC()
+        gameVC.title = "Game".uppercased()
+        gameVC.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 1)
+        
+        return UINavigationController(rootViewController: gameVC)
+    }
+    
+    
+    func createRankingNC() -> UINavigationController {
+        let rankingVC = RankingVC()
+        rankingVC.title = "Ranking".uppercased()
+        rankingVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
+        
+        return UINavigationController(rootViewController: rankingVC)
+    }
+    
+    
+    func createTabbar() -> UITabBarController {
+        let tabbar = UITabBarController()
+        UITabBar.appearance().tintColor = .systemGreen
+        tabbar.viewControllers = [createInitialNC(), createGameNC(), createRankingNC()]
+        
+        return tabbar
+    }
+    
+    func configureNavigationBar() {
+        UINavigationBar.appearance().tintColor = .systemGreen
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
