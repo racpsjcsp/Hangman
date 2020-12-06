@@ -13,6 +13,7 @@ class GameVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .black
         navigationController?.isNavigationBarHidden = false
         print("GAME viewDidLoad")

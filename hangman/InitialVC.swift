@@ -13,19 +13,25 @@ class InitialVC: UIViewController {
     let nicknameTextField = HMTextField()
     let emailTextField = HMTextField()
     let passwordTextField = HMTextField()
+    let textLabel = HMLabel()
+    let alertContainer = HMAlertContainerView()
     
-    let callToActionButton = HMButton(backgroundColor: .systemGreen, title: "Start Game".uppercased())
+    
+    let callToRegisterButton = HMButton(backgroundColor: .systemBlue, title: "Register")
+    let callToEnterButton = HMButton(backgroundColor: .systemGreen, title: "Start Game".uppercased())
     
     var isUsernameEntered: Bool { return !nicknameTextField.text!.isEmpty }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .systemBackground
         
         configureLogoImageView()
         configureEmailTextField()
         configurePasswordTextField()
-        configureNicknameTextField()
+        configureTextLabel()
+        configureRegisterButton()
         configureCallToActionButton()
         createDismissKeyboardTapgesture()
     }
@@ -43,15 +49,22 @@ class InitialVC: UIViewController {
     @objc func pushGameVC() {
         
         guard isUsernameEntered else {
-            print("No username...")
+            print("Vai apresentar o MODAL")
+            presentHMAlertOnMainThread(container: alertContainer, title: "No Username", message: "You must be logged in!", buttonTitle: "Ok")
             return
         }
         
         let gameVC = GameVC()
-        gameVC.username = nicknameTextField.text
-        gameVC.title = "Game".uppercased()
         navigationController?.pushViewController(gameVC, animated: true)
     }
+    
+    @objc func pushRegisterVC() {
+        
+        let registerVC = RegisterVC()
+        registerVC.title = "Register"
+        navigationController?.pushViewController(registerVC, animated: true)
+    }
+    
     
     func configureLogoImageView() {
         view.addSubview(logoImageView)
@@ -59,61 +72,76 @@ class InitialVC: UIViewController {
         logoImageView.image = UIImage(named: "hangman-logo")!
         
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 200),
             logoImageView.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
     
-    func configureNicknameTextField() {
-        view.addSubview(nicknameTextField)
-        nicknameTextField.delegate = self
-        
-        NSLayoutConstraint.activate([
-            nicknameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 80),
-            nicknameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nicknameTextField.heightAnchor.constraint(equalToConstant: 50),
-            nicknameTextField.widthAnchor.constraint(equalToConstant: 280)
-        ])
-    }
-    
     func configureEmailTextField() {
-        view.addSubview(nicknameTextField)
-        nicknameTextField.delegate = self
+        view.addSubview(emailTextField)
+        emailTextField.delegate = self
+        emailTextField.placeholder = "E-mail"
         
         NSLayoutConstraint.activate([
-            nicknameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 80),
-            nicknameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nicknameTextField.heightAnchor.constraint(equalToConstant: 50),
-            nicknameTextField.widthAnchor.constraint(equalToConstant: 280)
+            emailTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 20),
+            emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emailTextField.heightAnchor.constraint(equalToConstant: 50),
+            emailTextField.widthAnchor.constraint(equalToConstant: 280)
         ])
     }
     
     func configurePasswordTextField() {
-        view.addSubview(nicknameTextField)
-        nicknameTextField.delegate = self
+        view.addSubview(passwordTextField)
+        passwordTextField.delegate = self
+        passwordTextField.placeholder = "Password"
         
         NSLayoutConstraint.activate([
-            nicknameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 80),
-            nicknameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nicknameTextField.heightAnchor.constraint(equalToConstant: 50),
-            nicknameTextField.widthAnchor.constraint(equalToConstant: 280)
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
+            passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            passwordTextField.widthAnchor.constraint(equalToConstant: 280)
+        ])
+    }
+    
+    func configureTextLabel() {
+        view.addSubview(textLabel)
+//        textLabel.delegate = self
+        textLabel.text = "Not Registered?"
+        
+        
+        NSLayoutConstraint.activate([
+            textLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
+            textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            textLabel.heightAnchor.constraint(equalToConstant: 50),
+            textLabel.widthAnchor.constraint(equalToConstant: 280)
+        ])
+    }
+    
+    func configureRegisterButton() {
+        view.addSubview(callToRegisterButton)
+        
+        callToRegisterButton.addTarget(self, action: #selector(pushRegisterVC), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            callToRegisterButton.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 5),
+            callToRegisterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            callToRegisterButton.heightAnchor.constraint(equalToConstant: 50),
+            callToRegisterButton.widthAnchor.constraint(equalToConstant: 280)
         ])
     }
     
     func configureCallToActionButton() {
-        view.addSubview(callToActionButton)
+        view.addSubview(callToEnterButton)
         
-        callToActionButton.addTarget(self, action: #selector(pushGameVC), for: .touchUpInside)
-        
-//        callToActionButton.translatesAutoresizingMaskIntoConstraints = false
+        callToEnterButton.addTarget(self, action: #selector(pushGameVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            callToActionButton.topAnchor.constraint(equalTo: nicknameTextField.bottomAnchor, constant: 20),
-            callToActionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            callToActionButton.heightAnchor.constraint(equalToConstant: 50),
-            callToActionButton.widthAnchor.constraint(equalToConstant: 280)
+            callToEnterButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            callToEnterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            callToEnterButton.heightAnchor.constraint(equalToConstant: 50),
+            callToEnterButton.widthAnchor.constraint(equalToConstant: 280)
         ])
     }
 }

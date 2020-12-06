@@ -1,13 +1,13 @@
 //
-//  HMTextField.swift
+//  HMLabelVC.swift
 //  hangman
 //
-//  Created by Rafael Plinio on 29/11/20.
+//  Created by Rafael Plinio on 30/11/20.
 //
 
 import UIKit
 
-class HMTextField: UITextField {
+class HMLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,22 +20,16 @@ class HMTextField: UITextField {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        
-        layer.cornerRadius = 10
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.systemBackground.cgColor
-        
+                
         textColor = .label
         tintColor = .label
         textAlignment = .center
-        font = UIFont.preferredFont(forTextStyle: .title2)
-        font = UIFont(name: "Chalkboard SE", size: 20)
-        adjustsFontSizeToFitWidth = true
-        minimumFontSize = 12
-        
-        backgroundColor = .systemPurple
-        autocorrectionType = .no
-        returnKeyType = .go
-    }
 
+        font = UIFont.preferredFont(forTextStyle: .title2) //dynamic type
+        font = UIFont(name: "Chalkboard SE", size: 20)
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        backgroundColor = .systemBackground
+        
+    }
 }

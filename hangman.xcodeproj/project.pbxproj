@@ -7,29 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46137F1F2575D76A0066336A /* HMLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46137F1E2575D76A0066336A /* HMLabel.swift */; };
 		469C19BD2573EEDB0029B9C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19BC2573EEDB0029B9C3 /* AppDelegate.swift */; };
 		469C19BF2573EEDB0029B9C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19BE2573EEDB0029B9C3 /* SceneDelegate.swift */; };
 		469C19C12573EEDB0029B9C3 /* InitialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19C02573EEDB0029B9C3 /* InitialVC.swift */; };
 		469C19C62573EEDC0029B9C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 469C19C52573EEDC0029B9C3 /* Assets.xcassets */; };
-		469C19C92573EEDC0029B9C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 469C19C72573EEDC0029B9C3 /* LaunchScreen.storyboard */; };
 		469C19D92573F7560029B9C3 /* HMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19D82573F7560029B9C3 /* HMButton.swift */; };
 		469C19DC2573FB4C0029B9C3 /* HMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19DB2573FB4C0029B9C3 /* HMTextField.swift */; };
 		469C19E625744F6F0029B9C3 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19E525744F6F0029B9C3 /* GameVC.swift */; };
 		469C19EB257450020029B9C3 /* RankingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19EA257450020029B9C3 /* RankingVC.swift */; };
+		46D7D3732575DC6B0039FB69 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D7D3722575DC6B0039FB69 /* RegisterVC.swift */; };
+		46F58585257723F9002D205C /* HMTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F58584257723F9002D205C /* HMTitleLabel.swift */; };
+		46F5858825772598002D205C /* HMBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5858725772598002D205C /* HMBodyLabel.swift */; };
+		46F5858B25772658002D205C /* HMAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5858A25772658002D205C /* HMAlertVC.swift */; };
+		46F5859325772E33002D205C /* HMAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5859225772E33002D205C /* HMAlertContainerView.swift */; };
+		46F5859625773534002D205C /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5859525773534002D205C /* UIViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46137F1E2575D76A0066336A /* HMLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMLabel.swift; sourceTree = "<group>"; };
 		469C19B92573EEDB0029B9C3 /* hangman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hangman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		469C19BC2573EEDB0029B9C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		469C19BE2573EEDB0029B9C3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		469C19C02573EEDB0029B9C3 /* InitialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialVC.swift; sourceTree = "<group>"; };
 		469C19C52573EEDC0029B9C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		469C19C82573EEDC0029B9C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		469C19CA2573EEDC0029B9C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		469C19D82573F7560029B9C3 /* HMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMButton.swift; sourceTree = "<group>"; };
 		469C19DB2573FB4C0029B9C3 /* HMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMTextField.swift; sourceTree = "<group>"; };
 		469C19E525744F6F0029B9C3 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 		469C19EA257450020029B9C3 /* RankingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingVC.swift; sourceTree = "<group>"; };
+		46D7D3722575DC6B0039FB69 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		46F58584257723F9002D205C /* HMTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMTitleLabel.swift; sourceTree = "<group>"; };
+		46F5858725772598002D205C /* HMBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMBodyLabel.swift; sourceTree = "<group>"; };
+		46F5858A25772658002D205C /* HMAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMAlertVC.swift; sourceTree = "<group>"; };
+		46F5859225772E33002D205C /* HMAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMAlertContainerView.swift; sourceTree = "<group>"; };
+		46F5859525773534002D205C /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,11 +79,17 @@
 				469C19D82573F7560029B9C3 /* HMButton.swift */,
 				469C19C02573EEDB0029B9C3 /* InitialVC.swift */,
 				469C19C52573EEDC0029B9C3 /* Assets.xcassets */,
-				469C19C72573EEDC0029B9C3 /* LaunchScreen.storyboard */,
 				469C19CA2573EEDC0029B9C3 /* Info.plist */,
 				469C19DB2573FB4C0029B9C3 /* HMTextField.swift */,
 				469C19E525744F6F0029B9C3 /* GameVC.swift */,
 				469C19EA257450020029B9C3 /* RankingVC.swift */,
+				46137F1E2575D76A0066336A /* HMLabel.swift */,
+				46D7D3722575DC6B0039FB69 /* RegisterVC.swift */,
+				46F58584257723F9002D205C /* HMTitleLabel.swift */,
+				46F5858725772598002D205C /* HMBodyLabel.swift */,
+				46F5858A25772658002D205C /* HMAlertVC.swift */,
+				46F5859225772E33002D205C /* HMAlertContainerView.swift */,
+				46F5859525773534002D205C /* UIViewController+Ext.swift */,
 			);
 			path = hangman;
 			sourceTree = "<group>";
@@ -133,7 +151,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				469C19C92573EEDC0029B9C3 /* LaunchScreen.storyboard in Resources */,
 				469C19C62573EEDC0029B9C3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,28 +162,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46137F1F2575D76A0066336A /* HMLabel.swift in Sources */,
+				46D7D3732575DC6B0039FB69 /* RegisterVC.swift in Sources */,
+				46F5859625773534002D205C /* UIViewController+Ext.swift in Sources */,
 				469C19C12573EEDB0029B9C3 /* InitialVC.swift in Sources */,
 				469C19BD2573EEDB0029B9C3 /* AppDelegate.swift in Sources */,
+				46F5858B25772658002D205C /* HMAlertVC.swift in Sources */,
 				469C19DC2573FB4C0029B9C3 /* HMTextField.swift in Sources */,
 				469C19D92573F7560029B9C3 /* HMButton.swift in Sources */,
+				46F58585257723F9002D205C /* HMTitleLabel.swift in Sources */,
 				469C19EB257450020029B9C3 /* RankingVC.swift in Sources */,
 				469C19E625744F6F0029B9C3 /* GameVC.swift in Sources */,
+				46F5858825772598002D205C /* HMBodyLabel.swift in Sources */,
+				46F5859325772E33002D205C /* HMAlertContainerView.swift in Sources */,
 				469C19BF2573EEDB0029B9C3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		469C19C72573EEDC0029B9C3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				469C19C82573EEDC0029B9C3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		469C19CB2573EEDC0029B9C3 /* Debug */ = {

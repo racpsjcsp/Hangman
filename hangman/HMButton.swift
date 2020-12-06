@@ -11,7 +11,8 @@ class HMButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        configureStartButton()
+        configureRegisterButton()
     }
     
     required init?(coder: NSCoder) {
@@ -23,10 +24,22 @@ class HMButton: UIButton {
         self.backgroundColor = backgroundColor
         self.setTitle(title, for: .normal)
         
-        configure()
+        configureStartButton()
+        configureRegisterButton()
     }
     
-    private func configure() {
+    private func configureStartButton() {
+        layer.cornerRadius = 10
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.systemBackground.cgColor
+        
+        titleLabel?.textColor = .systemBackground
+        titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2) //dynamic type
+        titleLabel?.font = UIFont(name: "Chalkboard SE", size: 20)
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func configureRegisterButton() {
         layer.cornerRadius = 10
         layer.borderWidth = 2
         layer.borderColor = UIColor.systemBackground.cgColor

@@ -33,12 +33,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return UINavigationController(rootViewController: initialVC)
     }
     
+    func createAccountNC() -> UINavigationController {
+        let accountVC = RegisterVC()
+        accountVC.title = "Register"
+        return UINavigationController(rootViewController: accountVC)
+    }
+    
     
     func createGameNC() -> UINavigationController {
         let gameVC = GameVC()
+//        let gameIcon = UITabBarItem()
         gameVC.title = "Game".uppercased()
+//        gameIcon.image = UIImage(named: "face_on_yellow_power_icon")
+//        gameIcon.
         gameVC.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 1)
-        
+//        gameVC.tabBarItem = gameIcon
+    
         return UINavigationController(rootViewController: gameVC)
     }
     
