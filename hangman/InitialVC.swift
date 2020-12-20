@@ -10,7 +10,7 @@ import UIKit
 class InitialVC: UIViewController {
     
     let logoImageView = UIImageView()
-    let nicknameTextField = HMTextField()
+//    let nicknameTextField = HMTextField()
     let emailTextField = HMTextField()
     let passwordTextField = HMTextField()
     let textLabel = HMLabel()
@@ -20,7 +20,8 @@ class InitialVC: UIViewController {
     let callToRegisterButton = HMButton(backgroundColor: .systemBlue, title: "Register")
     let callToEnterButton = HMButton(backgroundColor: .systemGreen, title: "Start Game".uppercased())
     
-    var isUsernameEntered: Bool { return !nicknameTextField.text!.isEmpty }
+    var isUsernameEntered: Bool { return !emailTextField.text!.isEmpty }
+//    var isValidEmail: Bool { return !emailTextField.text!.isValidEmail() }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,8 @@ class InitialVC: UIViewController {
         configureRegisterButton()
         configureCallToActionButton()
         createDismissKeyboardTapgesture()
+        
+        emailTextField.text = "Dummy Name"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +56,11 @@ class InitialVC: UIViewController {
             presentHMAlertOnMainThread(container: alertContainer, title: "No Username", message: "You must be logged in!", buttonTitle: "Ok")
             return
         }
+        
+//        guard isValidEmail else {
+//            presentHMAlertOnMainThread(container: alertContainer, title: "Invalid E-mail", message: "Check your e-mail and try again!", buttonTitle: "Ok")
+//            return
+//        }
         
         let gameVC = GameVC()
         navigationController?.pushViewController(gameVC, animated: true)
@@ -107,9 +115,8 @@ class InitialVC: UIViewController {
     
     func configureTextLabel() {
         view.addSubview(textLabel)
-//        textLabel.delegate = self
-        textLabel.text = "Not Registered?"
         
+        textLabel.text = "Not Registered?"
         
         NSLayoutConstraint.activate([
             textLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
@@ -152,4 +159,14 @@ extension InitialVC: UITextFieldDelegate {
         pushGameVC()
         return true
     }
+    
+//    private func textFieldDidEndEditing(_ textField: HMTextField) {
+//        if let emailTextField = textField.text {
+//            if emailTextField.isValidEmail() {
+//                print("Okay Email go ahead")
+//            }else{
+//                print("Enter a valid email address first.")
+//            }
+//        }
+//    }
 }

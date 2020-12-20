@@ -16,6 +16,7 @@
 		469C19DC2573FB4C0029B9C3 /* HMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19DB2573FB4C0029B9C3 /* HMTextField.swift */; };
 		469C19E625744F6F0029B9C3 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19E525744F6F0029B9C3 /* GameVC.swift */; };
 		469C19EB257450020029B9C3 /* RankingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19EA257450020029B9C3 /* RankingVC.swift */; };
+		46A0F666257C689F005441DB /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A0F665257C689F005441DB /* String+Ext.swift */; };
 		46D7D3732575DC6B0039FB69 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D7D3722575DC6B0039FB69 /* RegisterVC.swift */; };
 		46F58585257723F9002D205C /* HMTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F58584257723F9002D205C /* HMTitleLabel.swift */; };
 		46F5858825772598002D205C /* HMBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F5858725772598002D205C /* HMBodyLabel.swift */; };
@@ -36,6 +37,7 @@
 		469C19DB2573FB4C0029B9C3 /* HMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMTextField.swift; sourceTree = "<group>"; };
 		469C19E525744F6F0029B9C3 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 		469C19EA257450020029B9C3 /* RankingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingVC.swift; sourceTree = "<group>"; };
+		46A0F665257C689F005441DB /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		46D7D3722575DC6B0039FB69 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		46F58584257723F9002D205C /* HMTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMTitleLabel.swift; sourceTree = "<group>"; };
 		46F5858725772598002D205C /* HMBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMBodyLabel.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				46F5858A25772658002D205C /* HMAlertVC.swift */,
 				46F5859225772E33002D205C /* HMAlertContainerView.swift */,
 				46F5859525773534002D205C /* UIViewController+Ext.swift */,
+				46A0F665257C689F005441DB /* String+Ext.swift */,
 			);
 			path = hangman;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				46137F1F2575D76A0066336A /* HMLabel.swift in Sources */,
 				46D7D3732575DC6B0039FB69 /* RegisterVC.swift in Sources */,
 				46F5859625773534002D205C /* UIViewController+Ext.swift in Sources */,
+				46A0F666257C689F005441DB /* String+Ext.swift in Sources */,
 				469C19C12573EEDB0029B9C3 /* InitialVC.swift in Sources */,
 				469C19BD2573EEDB0029B9C3 /* AppDelegate.swift in Sources */,
 				46F5858B25772658002D205C /* HMAlertVC.swift in Sources */,
