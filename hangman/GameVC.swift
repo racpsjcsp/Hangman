@@ -15,6 +15,8 @@ class GameVC: UIViewController {
     var pickedWord: [Character] = []
     var numberOfGuesses: Int = 6
     
+    let alertContainer = HMAlertContainerView()
+    
     private lazy var firstButtonArrayStackView = UIStackView()
     private lazy var secondButtonArrayStackView = UIStackView()
     private lazy var thirdButtonArrayStackView = UIStackView()
@@ -48,12 +50,12 @@ class GameVC: UIViewController {
     private lazy var buttonY = HMButton(backgroundColor: .systemBlue, title: "Y")
     private lazy var buttonZ = HMButton(backgroundColor: .systemBlue, title: "Z")
     
-    var buttonsArray: [HMButton?] {
-        [self.buttonA, self.buttonB, self.buttonC, self.buttonD, self.buttonE, self.buttonF, self.buttonG,
-         self.buttonH, self.buttonI, self.buttonJ, self.buttonK, self.buttonL, self.buttonM, self.buttonN,
-         self.buttonO, self.buttonP, self.buttonQ, self.buttonR, self.buttonS, self.buttonT, self.buttonU,
-         self.buttonV, self.buttonW, self.buttonX, self.buttonY, self.buttonZ]
-    }
+//    var buttonsArray: [HMButton?] {
+//        [self.buttonA, self.buttonB, self.buttonC, self.buttonD, self.buttonE, self.buttonF, self.buttonG,
+//         self.buttonH, self.buttonI, self.buttonJ, self.buttonK, self.buttonL, self.buttonM, self.buttonN,
+//         self.buttonO, self.buttonP, self.buttonQ, self.buttonR, self.buttonS, self.buttonT, self.buttonU,
+//         self.buttonV, self.buttonW, self.buttonX, self.buttonY, self.buttonZ]
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +93,22 @@ class GameVC: UIViewController {
         
     }
     
-   
+    func showAlert() {
+        presentHMAlertOnMainThread(container: alertContainer, title: "You Got It!", message: "Congratulations! You finally guessed the word.", buttonTitle: "Ok")
+    }
+    
+    func checkWin() -> Bool {
+        let win: Bool = true
+        let notWin: Bool = true
+        if ((wordLabel.text?.contains("_")) != nil) {
+            print(win)
+            
+            return notWin
+        } else {
+            showAlert()
+            return win
+        }
+    }
     
     
 //MARK: -
@@ -137,16 +154,18 @@ class GameVC: UIViewController {
                 
                 if pickedWord.contains(Character(letterPressed)) {
                     sender.backgroundColor = .systemGreen
-                    sender.alpha = 0.8
+                    sender.alpha = 0.9
+                    
                 } else {
                     sender.backgroundColor = .systemRed
-                    sender.alpha = 0.8
+                    
+                    sender.alpha = 0.9
                     sender.isEnabled = false
                 }
             }
             
             wordLabel.text = String(hiddenWord)
-          
+            
         }
     }
 }
@@ -158,7 +177,7 @@ extension GameVC {
         view.addSubview(wordLabel)
         
         wordLabel.font = UIFont.preferredFont(forTextStyle: .title1)
-        wordLabel.font = UIFont(name: "Chalkboard SE", size: 30)
+        wordLabel.font = UIFont(name: "Chalkboard SE", size: 32)
         wordLabel.layer.cornerRadius = 10
         wordLabel.layer.borderWidth = 2
         wordLabel.layer.borderColor = UIColor.systemGray4.cgColor
