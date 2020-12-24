@@ -11,19 +11,11 @@ class GameVC: UIViewController {
 
     var username: String!
     
-    let wordList = ["pineapple", "banana", "fig"]
-    var hiddenWord: [Character] = []
-    var pickedWord: [Character] = []
-    
     private lazy var firstButtonArrayStackView = UIStackView()
     private lazy var secondButtonArrayStackView = UIStackView()
     private lazy var thirdButtonArrayStackView = UIStackView()
     private lazy var fourthButtonArrayStackView = UIStackView()
     private lazy var wordLabel = HMLabel()
-    private lazy var letterButton = HMButton(backgroundColor: .systemBlue, title: "")
-    
-//    private lazy var alphabet: [Character] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-//                    "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "W", "Y", "Z"]
     
     private lazy var buttonA = HMButton(backgroundColor: .systemBlue, title: "A")
     private lazy var buttonB = HMButton(backgroundColor: .systemBlue, title: "B")
@@ -47,12 +39,17 @@ class GameVC: UIViewController {
     private lazy var buttonT = HMButton(backgroundColor: .systemBlue, title: "T")
     private lazy var buttonU = HMButton(backgroundColor: .systemBlue, title: "U")
     private lazy var buttonV = HMButton(backgroundColor: .systemBlue, title: "V")
-    private lazy var buttonX = HMButton(backgroundColor: .systemBlue, title: "X")
-    private lazy var buttonW = HMButton(backgroundColor: .systemBlue, title: "W")
+    private lazy var buttonX = HMButton(backgroundColor: .systemBlue, title: "W")
+    private lazy var buttonW = HMButton(backgroundColor: .systemBlue, title: "X")
     private lazy var buttonY = HMButton(backgroundColor: .systemBlue, title: "Y")
     private lazy var buttonZ = HMButton(backgroundColor: .systemBlue, title: "Z")
     
-    
+    var buttonsArray: [HMButton?] {
+        [self.buttonA, self.buttonB, self.buttonC, self.buttonD, self.buttonE, self.buttonF, self.buttonG,
+         self.buttonH, self.buttonI, self.buttonJ, self.buttonK, self.buttonL, self.buttonM, self.buttonN,
+         self.buttonO, self.buttonP, self.buttonQ, self.buttonR, self.buttonS, self.buttonT, self.buttonU,
+         self.buttonV, self.buttonW, self.buttonX, self.buttonY, self.buttonZ]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,19 +58,23 @@ class GameVC: UIViewController {
         title = "GAME"
         navigationController?.isNavigationBarHidden = false
         
-        
-        
         setupFourthRowButtonStackView()
         setupThirdRowButtonStackView()
         setupSecondRowButtonStackView()
         setupFirstRowButtonStackView()
         setupWordLabel()
         pickupRandomWord()
+//        addTagsToButtons()
+        detectButtonPressed()
+        
     }
     
     
-    
 //MARK: - Logic
+    
+    let wordList = ["pineapple", "banana", "fig"]
+    var hiddenWord: [Character] = []
+    var pickedWord: [Character] = []
     
     
     func pickupRandomWord() {
@@ -87,35 +88,69 @@ class GameVC: UIViewController {
         wordLabel.text = String(hiddenWord)
         wordLabel.setCharacterSpacing(5)
         
-        print(hiddenWord)
-        print(pickedWord)
+        print("hiddenWord [character]:  \(hiddenWord)")
+        print("pickedWord [character]:  \(pickedWord)")
         
     }
     
-    //need to fix this 
-    func isMatch(with letter: Character) -> Bool {
-        var letterExists: Bool = false
+//MARK: - Button Actions
+    func detectButtonPressed() {
+        buttonA.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonB.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonC.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonD.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonE.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonF.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonG.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonH.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonI.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonJ.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonK.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonL.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonM.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonN.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonO.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonP.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonQ.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonR.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonS.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonT.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonU.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonV.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonW.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonX.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonY.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        buttonZ.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
 
-        for (i, char) in pickedWord.enumerated() {
-            if char == letter {
-                letterExists = true
-                pickedWord[i] = letter
+    }
+    
+    var temporaryWord: [Character] = []
+    
+    @objc func buttonPressed(_ sender: UIButton) {
+        if let letterPressed = sender.titleLabel?.text {
+            print(sender.titleLabel?.text)
+            
+            for (i, char) in pickedWord.enumerated() {
+                if char == Character(letterPressed) {
+                    hiddenWord[i] = Character(letterPressed)
+                    
+                }
+                
+                if pickedWord.contains(Character(letterPressed)) {
+                    sender.backgroundColor = .systemGreen
+                } else {
+                    sender.backgroundColor = .systemRed
+                    sender.alpha = 0.8
+                    sender.isEnabled = false
+                }
             }
+            
+            wordLabel.text = String(hiddenWord)
+
         }
-
-        return letterExists
-
     }
 }
 
-//extension
-extension UILabel {
-    func setCharacterSpacing(_ spacing: CGFloat){
-        let attributedStr = NSMutableAttributedString(string: self.text ?? "")
-        attributedStr.addAttribute(NSAttributedString.Key.kern, value: spacing, range: NSMakeRange(0, attributedStr.length))
-        self.attributedText = attributedStr
-     }
-}
 
 //MARK: - UI
 extension GameVC {
@@ -123,15 +158,15 @@ extension GameVC {
         view.addSubview(wordLabel)
         
         wordLabel.font = UIFont.preferredFont(forTextStyle: .title1)
-        wordLabel.font = UIFont(name: "Chalkboard SE", size: 26)
+        wordLabel.font = UIFont(name: "Chalkboard SE", size: 30)
         wordLabel.layer.cornerRadius = 10
         wordLabel.layer.borderWidth = 2
         wordLabel.layer.borderColor = UIColor.systemBackground.cgColor
         wordLabel.layer.masksToBounds = true
         
         
-        wordLabel.backgroundColor = .systemGray6
-        wordLabel.textColor = .systemGreen
+        wordLabel.backgroundColor = .systemGray4
+        wordLabel.textColor = .systemPurple
         
         NSLayoutConstraint.activate([
             wordLabel.bottomAnchor.constraint(equalTo: firstButtonArrayStackView.topAnchor, constant: -16),
@@ -250,3 +285,12 @@ extension GameVC {
 
 
 
+//extension
+extension UILabel {
+    func setCharacterSpacing(_ spacing: CGFloat){
+        let attributedStr = NSMutableAttributedString(string: self.text ?? "")
+        attributedStr.addAttribute(NSAttributedString.Key.kern, value: spacing, range: NSMakeRange(0, attributedStr.length))
+        
+        self.attributedText = attributedStr
+     }
+}
