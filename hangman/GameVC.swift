@@ -10,6 +10,10 @@ import UIKit
 class GameVC: UIViewController {
 
     var username: String!
+    let wordList = ["pineapple", "banana", "fig"]
+    var hiddenWord: [Character] = []
+    var pickedWord: [Character] = []
+    var numberOfGuesses: Int = 6
     
     private lazy var firstButtonArrayStackView = UIStackView()
     private lazy var secondButtonArrayStackView = UIStackView()
@@ -54,7 +58,7 @@ class GameVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .black
+        view.backgroundColor = .systemGray6
         title = "GAME"
         navigationController?.isNavigationBarHidden = false
         
@@ -64,18 +68,12 @@ class GameVC: UIViewController {
         setupFirstRowButtonStackView()
         setupWordLabel()
         pickupRandomWord()
-//        addTagsToButtons()
         detectButtonPressed()
         
     }
     
     
 //MARK: - Logic
-    
-    let wordList = ["pineapple", "banana", "fig"]
-    var hiddenWord: [Character] = []
-    var pickedWord: [Character] = []
-    
     
     func pickupRandomWord() {
         
@@ -92,6 +90,11 @@ class GameVC: UIViewController {
         print("pickedWord [character]:  \(pickedWord)")
         
     }
+    
+   
+    
+    
+//MARK: -
     
 //MARK: - Button Actions
     func detectButtonPressed() {
@@ -124,20 +127,17 @@ class GameVC: UIViewController {
 
     }
     
-    var temporaryWord: [Character] = []
-    
     @objc func buttonPressed(_ sender: UIButton) {
+        
         if let letterPressed = sender.titleLabel?.text {
-            print(sender.titleLabel?.text)
-            
             for (i, char) in pickedWord.enumerated() {
                 if char == Character(letterPressed) {
                     hiddenWord[i] = Character(letterPressed)
-                    
                 }
                 
                 if pickedWord.contains(Character(letterPressed)) {
                     sender.backgroundColor = .systemGreen
+                    sender.alpha = 0.8
                 } else {
                     sender.backgroundColor = .systemRed
                     sender.alpha = 0.8
@@ -146,7 +146,7 @@ class GameVC: UIViewController {
             }
             
             wordLabel.text = String(hiddenWord)
-
+          
         }
     }
 }
@@ -161,12 +161,12 @@ extension GameVC {
         wordLabel.font = UIFont(name: "Chalkboard SE", size: 30)
         wordLabel.layer.cornerRadius = 10
         wordLabel.layer.borderWidth = 2
-        wordLabel.layer.borderColor = UIColor.systemBackground.cgColor
+        wordLabel.layer.borderColor = UIColor.systemGray4.cgColor
         wordLabel.layer.masksToBounds = true
         
         
-        wordLabel.backgroundColor = .systemGray4
-        wordLabel.textColor = .systemPurple
+        wordLabel.backgroundColor = .white
+        wordLabel.textColor = .black
         
         NSLayoutConstraint.activate([
             wordLabel.bottomAnchor.constraint(equalTo: firstButtonArrayStackView.topAnchor, constant: -16),
