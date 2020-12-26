@@ -1,7 +1,7 @@
 # Hangman
 Hangman Game in Swift
 
-##DONE:
+** DONE:
 * First (login) screen
 * Second (game) screen
 * Game logic
