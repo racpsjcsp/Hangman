@@ -10,18 +10,46 @@ import UIKit
 class GameVC: UIViewController {
 
     var username: String!
-    let wordList = ["pineapple", "banana", "fig"]
+    let wordList = ["Abnegation", "Aggrandize", "Alacrity", "Beguile", "Blandishment", "Callous", "Camaraderie", "Cognizant",                     "Convivial", "Construe", "Demagogue", "Denigrate", "Didactic", "Disparate", "Egregious", "Embezzlement",
+                    "Enervate", "Ephemeral", "Equanimity","Fatuous", "Gratuitous", "Iconoclast",
+                    "Incumbent", "Inveterate","Idiosyncratic", "Quotidian", "Promulgate", "Sanctimonious",
+                    "Recalcitrant", "Vociferous", "Vicissitude", "Solipsism", "Pertinacious", "Obdurate", "Licentious",
+                    "Mendacious"]
+    
     var hiddenWord: [Character] = []
     var pickedWord: [Character] = []
     var numberOfGuesses: Int = 6
     
-    let alertContainer = HMAlertContainerView()
+    var timer = Timer()
+    
+    private lazy var hangmanImage = UIImageView()
+    private lazy var hideContainer = UIView()
+    private lazy var hideBlock = CAShapeLayer()
+    
+    
+    private lazy var hangmanContainer = UIImageView()
+    
+    private lazy var leftArm = UIImageView()
+    private lazy var rightArm = UIImageView()
+    private lazy var leftLeg = UIImageView()
+    private lazy var rightLeg = UIImageView()
+    private lazy var head = UIImageView()
+    private lazy var torso = UIImageView()
+    private lazy var rightArmShoulder = UIImageView()
+    private lazy var cordPiece = UIImageView()
+    
+    private lazy var upperPole = UIImageView()
+    private lazy var basePole = UIImageView()
+    
+    
+    
+    private lazy var alertContainer = HMAlertContainerView()
+    private lazy var wordLabel = HMLabel()
     
     private lazy var firstButtonArrayStackView = UIStackView()
     private lazy var secondButtonArrayStackView = UIStackView()
     private lazy var thirdButtonArrayStackView = UIStackView()
     private lazy var fourthButtonArrayStackView = UIStackView()
-    private lazy var wordLabel = HMLabel()
     
     private lazy var buttonA = HMButton(backgroundColor: .systemBlue, title: "A")
     private lazy var buttonB = HMButton(backgroundColor: .systemBlue, title: "B")
@@ -50,12 +78,12 @@ class GameVC: UIViewController {
     private lazy var buttonY = HMButton(backgroundColor: .systemBlue, title: "Y")
     private lazy var buttonZ = HMButton(backgroundColor: .systemBlue, title: "Z")
     
-//    var buttonsArray: [HMButton?] {
-//        [self.buttonA, self.buttonB, self.buttonC, self.buttonD, self.buttonE, self.buttonF, self.buttonG,
-//         self.buttonH, self.buttonI, self.buttonJ, self.buttonK, self.buttonL, self.buttonM, self.buttonN,
-//         self.buttonO, self.buttonP, self.buttonQ, self.buttonR, self.buttonS, self.buttonT, self.buttonU,
-//         self.buttonV, self.buttonW, self.buttonX, self.buttonY, self.buttonZ]
-//    }
+    var buttonsArray: [HMButton?] {
+        [buttonA, buttonB, buttonC, buttonD, buttonE, buttonF, buttonG,
+         buttonH, buttonI, buttonJ, buttonK, buttonL, buttonM, buttonN,
+         buttonO, buttonP, buttonQ, buttonR, buttonS, buttonT, buttonU,
+         buttonV, buttonW, buttonX, buttonY, buttonZ]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +92,9 @@ class GameVC: UIViewController {
         title = "GAME"
         navigationController?.isNavigationBarHidden = false
         
+        setupHangmanContainer()
+        setupUpperPole()
+//        setupHideBlocks()
         setupFourthRowButtonStackView()
         setupThirdRowButtonStackView()
         setupSecondRowButtonStackView()
@@ -73,7 +104,7 @@ class GameVC: UIViewController {
         detectButtonPressed()
         
     }
-    
+
     
 //MARK: - Logic
     
@@ -86,32 +117,79 @@ class GameVC: UIViewController {
         }
     
         wordLabel.text = String(hiddenWord)
-        wordLabel.setCharacterSpacing(5)
-        
-        print("hiddenWord [character]:  \(hiddenWord)")
-        print("pickedWord [character]:  \(pickedWord)")
-        
+        wordLabel.setCharacterSpacing(3)
     }
     
-    func showAlert() {
-        presentHMAlertOnMainThread(container: alertContainer, title: "You Got It!", message: "Congratulations! You finally guessed the word.", buttonTitle: "Ok")
+    func showWinAlert() {
+        presentHMAlertOnMainThread(container: alertContainer,
+                                   title: "You Got It! 🤓",
+                                   message: "Congratulations! The word you guessed was: \(String(pickedWord)).",
+                                   buttonTitle: "Ok")
+        resetGame()
     }
     
-    func checkWin() -> Bool {
-        let win: Bool = true
-        let notWin: Bool = true
-        if ((wordLabel.text?.contains("_")) != nil) {
-            print(win)
-            
-            return notWin
+    func showLoseAlert() {
+        presentHMAlertOnMainThread(container: alertContainer,
+                                   title: "You Didn't Get It! 😖",
+                                   message: "Better luck next time if you come across this same word in the future 😄",
+                                   buttonTitle: "Ok")
+        resetGame()
+    }
+    
+    func checkIfWon() {
+        if (wordLabel.text != String(pickedWord)) {
+            if numberOfGuesses <= 0 {
+                wordLabel.backgroundColor = .systemRed
+                wordLabel.textColor = .white
+
+                loseAlertTimer()
+            }
         } else {
-            showAlert()
-            return win
+            wordLabel.backgroundColor = .systemGreen
+            wordLabel.textColor = .systemGray6
+
+            winAlertTimer()
+        }
+    }
+    
+    func resetGame() {
+        
+        numberOfGuesses = 6
+        
+        pickedWord.removeAll()
+        hiddenWord.removeAll()
+        
+        wordLabel.text?.removeAll()
+        wordLabel.backgroundColor = .white
+        wordLabel.textColor = .black
+        
+        pickupRandomWord()
+
+        for button in buttonsArray {
+            button?.isEnabled = true
+            button?.backgroundColor = .systemBlue
         }
     }
     
     
-//MARK: -
+//MARK: - Timer
+    
+    func winAlertTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(winTimerAction), userInfo: nil, repeats: false)
+    }
+    
+    @objc func winTimerAction() {
+        showWinAlert()
+    }
+    
+    func loseAlertTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(loseTimerAction), userInfo: nil, repeats: false)
+    }
+    
+    @objc func loseTimerAction() {
+        showLoseAlert()
+    }
+    
     
 //MARK: - Button Actions
     func detectButtonPressed() {
@@ -151,21 +229,25 @@ class GameVC: UIViewController {
                 if char == Character(letterPressed) {
                     hiddenWord[i] = Character(letterPressed)
                 }
+            }
+            
+            if pickedWord.contains(Character(letterPressed)) {
+                sender.backgroundColor = .systemGreen
+                sender.alpha = 0.9
+                sender.isEnabled = false
                 
-                if pickedWord.contains(Character(letterPressed)) {
-                    sender.backgroundColor = .systemGreen
-                    sender.alpha = 0.9
-                    
-                } else {
-                    sender.backgroundColor = .systemRed
-                    
-                    sender.alpha = 0.9
-                    sender.isEnabled = false
-                }
+            } else {
+                sender.backgroundColor = .systemRed
+                sender.alpha = 0.9
+                sender.isEnabled = false
+                
+                numberOfGuesses -= 1
             }
             
             wordLabel.text = String(hiddenWord)
             
+            checkIfWon()
+
         }
     }
 }
@@ -173,11 +255,99 @@ class GameVC: UIViewController {
 
 //MARK: - UI
 extension GameVC {
+    
+    func setupHangmanContainer() {
+        view.addSubview(hangmanContainer)
+        
+//        hangmanContainer.addSubview(upperPole)
+//        hangmanContainer.addSubview(basePole)
+//        hangmanContainer.addSubview(cordPiece)
+//        hangmanContainer.addSubview(head)
+//        hangmanContainer.addSubview(torso)
+//        hangmanContainer.addSubview(leftArm)
+//        hangmanContainer.addSubview(rightArm)
+//        hangmanContainer.addSubview(rightArmShoulder)
+//        hangmanContainer.addSubview(leftLeg)
+//        hangmanContainer.addSubview(rightLeg)
+
+        hangmanContainer.translatesAutoresizingMaskIntoConstraints = false
+        
+        upperPole.image = UIImage(named: "upperPole")
+        basePole.image = UIImage(named: "basePole")
+        cordPiece.image = UIImage(named: "cordPiece")
+        head.image = UIImage(named: "head")
+        torso.image = UIImage(named: "torso")
+        leftArm.image = UIImage(named: "leftArm")
+        rightArm.image = UIImage(named: "rightArm")
+        rightArmShoulder.image = UIImage(named: "rightArmShoulder")
+        leftLeg.image = UIImage(named: "leftLeg")
+        rightLeg.image = UIImage(named: "rightLeg")
+        hangmanContainer.backgroundColor = .systemGreen
+        
+        
+        NSLayoutConstraint.activate([
+            hangmanContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            hangmanContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            hangmanContainer.heightAnchor.constraint(equalToConstant: 280),
+            hangmanContainer.widthAnchor.constraint(equalToConstant: 280)
+        ])
+        
+    }
+    
+    func setupUpperPole() {
+        view.addSubview(upperPole)
+        
+        upperPole.translatesAutoresizingMaskIntoConstraints = false
+        upperPole.image = UIImage(named: "upperPole")
+       
+        NSLayoutConstraint.activate([
+            upperPole.topAnchor.constraint(equalTo: hangmanContainer.topAnchor),
+            upperPole.centerXAnchor.constraint(equalTo: hangmanContainer.centerXAnchor)
+        ])
+        
+    }
+    
+    func setupBasePole() {
+        view.addSubview(basePole)
+        
+        basePole.translatesAutoresizingMaskIntoConstraints = false
+        basePole.image = UIImage(named: "basePole")
+        NSLayoutConstraint.activate([
+            basePole.topAnchor.constraint(equalTo: upperPole.bottomAnchor),
+            basePole.trailingAnchor.constraint(equalTo: hangmanContainer.trailingAnchor)
+        ])
+        
+    }
+    
+    func setupHideBlocks() {
+        view.addSubview(hideContainer)
+//        hideContainer.layer.addSublayer(hideBlock)
+//        hideContainer.isHidden = false
+        
+//        hideBlock.path = UIBezierPath(ovalIn: CGRect(x: 50, y: 50, width: 100, height: 100)).cgPath
+        
+//        hideBlock.strokeColor = UIColor.systemGray6.cgColor
+//        hideBlock.fillColor = UIColor.systemGray6.cgColor
+//        hideBlock.translatesAutoresizingMaskIntoConstraints = false
+//        hideBlock.backgroundColor = .systemRed
+//        hideBlock.layer
+//        hideBlock.layer.cornerRadius = 50
+        
+        NSLayoutConstraint.activate([
+            hideContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            hideContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            hideContainer.heightAnchor.constraint(equalToConstant: 30),
+            hideContainer.widthAnchor.constraint(equalToConstant: 30)
+        ])
+        
+    }
+    
     func setupWordLabel() {
         view.addSubview(wordLabel)
         
         wordLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         wordLabel.font = UIFont(name: "Chalkboard SE", size: 32)
+        wordLabel.minimumScaleFactor = 0.60
         wordLabel.layer.cornerRadius = 10
         wordLabel.layer.borderWidth = 2
         wordLabel.layer.borderColor = UIColor.systemGray4.cgColor
@@ -303,7 +473,6 @@ extension GameVC {
 }
 
 
-
 //extension
 extension UILabel {
     func setCharacterSpacing(_ spacing: CGFloat){
@@ -313,3 +482,5 @@ extension UILabel {
         self.attributedText = attributedStr
      }
 }
+
+
