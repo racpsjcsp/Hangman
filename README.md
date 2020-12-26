@@ -1,7 +1,7 @@
 # Hangman
 Hangman Game in Swift
 
-** DONE:
+## DONE:
 * First (login) screen
 * Second (game) screen
 * Game logic
@@ -10,10 +10,10 @@ Hangman Game in Swift
 * Button effects (red = wrong, green = right and enable/disable)
 * Match reset
 
-##DOING: 
+## DOING: 
 * The hangman image to display along the gameplay
 
-##TO DO:
+## TO DO:
 * Word list (will be an english dictionary (JSON) in the future)
 * User Authentication (Firebase probably)
 * User send words to database and add it to the dictionary if not in it
