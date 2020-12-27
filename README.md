@@ -20,6 +20,7 @@ Hangman Game in Swift
 * Audio effects
 * Scores
 * Difficulty levels
+* Tab Bar Icons (they are just placeholders for now)
 
 
 
