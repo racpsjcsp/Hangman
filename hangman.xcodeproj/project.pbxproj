@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		46137F1F2575D76A0066336A /* HMLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46137F1E2575D76A0066336A /* HMLabel.swift */; };
+		4626EE2725A00E2700E161C2 /* ScreenSize+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4626EE2625A00E2700E161C2 /* ScreenSize+Ext.swift */; };
 		469C19BD2573EEDB0029B9C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19BC2573EEDB0029B9C3 /* AppDelegate.swift */; };
 		469C19BF2573EEDB0029B9C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19BE2573EEDB0029B9C3 /* SceneDelegate.swift */; };
 		469C19C12573EEDB0029B9C3 /* InitialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C19C02573EEDB0029B9C3 /* InitialVC.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		46137F1E2575D76A0066336A /* HMLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMLabel.swift; sourceTree = "<group>"; };
+		4626EE2625A00E2700E161C2 /* ScreenSize+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScreenSize+Ext.swift"; sourceTree = "<group>"; };
 		469C19B92573EEDB0029B9C3 /* hangman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hangman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		469C19BC2573EEDB0029B9C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		469C19BE2573EEDB0029B9C3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				46F5859225772E33002D205C /* HMAlertContainerView.swift */,
 				46F5859525773534002D205C /* UIViewController+Ext.swift */,
 				46A0F665257C689F005441DB /* String+Ext.swift */,
+				4626EE2625A00E2700E161C2 /* ScreenSize+Ext.swift */,
 			);
 			path = hangman;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				46A0F666257C689F005441DB /* String+Ext.swift in Sources */,
 				469C19C12573EEDB0029B9C3 /* InitialVC.swift in Sources */,
 				469C19BD2573EEDB0029B9C3 /* AppDelegate.swift in Sources */,
+				4626EE2725A00E2700E161C2 /* ScreenSize+Ext.swift in Sources */,
 				46F5858B25772658002D205C /* HMAlertVC.swift in Sources */,
 				469C19DC2573FB4C0029B9C3 /* HMTextField.swift in Sources */,
 				469C19D92573F7560029B9C3 /* HMButton.swift in Sources */,
