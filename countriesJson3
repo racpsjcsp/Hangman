@@ -11,5 +11,29 @@
       "TJK",
       "CHN"
     ]
+  },
+  {
+    "alpha2Code": "GG",
+    "alpha3Code": "GGG",
+    "area": 111111,
+    "borders": [
+      "ABC",
+      "CDE",
+      "EFG",
+      "GHI"
+    ]
+  },
+  {
+    "alpha2Code": "BB",
+    "alpha3Code": "BBB",
+    "area": 222222,
+    "borders": [
+      "IJK",
+      "KLM",
+      "MNO",
+      "OPQ",
+      "QRS",
+      "STU"
+    ]
   }
 ]
