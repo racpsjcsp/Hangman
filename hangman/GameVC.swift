@@ -80,7 +80,7 @@ class GameVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .gray
         title = "GAME"
         navigationController?.isNavigationBarHidden = false
         
@@ -92,7 +92,7 @@ class GameVC: UIViewController {
         setupHangmanContainer()
         pickupRandomWord()
         detectButtonPressed()
-        
+        resetBodyParts()
     }
 
     
@@ -160,16 +160,19 @@ class GameVC: UIViewController {
             button?.backgroundColor = .systemBlue
         }
 
+        resetBodyParts()
+    }
+
+    func resetBodyParts() {
         for bodyPart in bodyParts {
-            bodyPart.backgroundColor = .systemGray6
+            bodyPart.backgroundColor = .gray
         }
     }
-    
     
 //MARK: - Timer
     
     func winAlertTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(winTimerAction), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(winTimerAction), userInfo: nil, repeats: false)
     }
     
     @objc func winTimerAction() {
@@ -177,7 +180,7 @@ class GameVC: UIViewController {
     }
     
     func loseAlertTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(loseTimerAction), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(loseTimerAction), userInfo: nil, repeats: false)
     }
     
     @objc func loseTimerAction() {
@@ -319,7 +322,7 @@ extension GameVC {
             hideRightArm.topAnchor.constraint(equalTo: hideTorso.topAnchor, constant: 0),
             hideRightArm.heightAnchor.constraint(equalToConstant: 75),
             hideRightArm.widthAnchor.constraint(equalToConstant: 30),
-            hideRightArm.leadingAnchor.constraint(equalTo: hideTorso.trailingAnchor, constant: 0)
+            hideRightArm.leadingAnchor.constraint(equalTo: hideTorso.trailingAnchor, constant: -4)
         ])
 
         hideLeftLeg.backgroundColor = .systemGray6
@@ -337,13 +340,10 @@ extension GameVC {
             hideRightLeg.topAnchor.constraint(equalTo: hideTorso.bottomAnchor, constant: 0),
             hideRightLeg.heightAnchor.constraint(equalToConstant: 75),
             hideRightLeg.widthAnchor.constraint(equalToConstant: 30),
-            hideRightLeg.leadingAnchor.constraint(equalTo: hideTorso.centerXAnchor, constant: 0)
+            hideRightLeg.leadingAnchor.constraint(equalTo: hideTorso.centerXAnchor, constant: -2)
         ])
     }
  
-
-
-    
     func setupWordLabel() {
         view.addSubview(wordLabel)
         
